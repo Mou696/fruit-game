@@ -16,7 +16,7 @@ function createRandomSlotContent(slot) {
 function startSpin() {
     // Check if the player has enough points to spin
     if (score < multiplier) {
-        alert("You don't have enough points to spin. Game over.");
+        alert("No money WOMP WOMP, That's why you SHOULDN'T GAMBLE. Y to RESTART");
         return;
     }
 
@@ -54,7 +54,7 @@ function startSpin() {
         checkWinCondition();
         isSpinning = false;  // Set spinning status to false
         document.getElementById("spinButton").disabled = false;  // Re-enable the spin button
-    }, 5000);
+    }, 1000);
 }
 
 // Function to stop spinning by clearing intervals
@@ -149,3 +149,10 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("multiplier2").addEventListener("click", () => selectMultiplier(2));
     document.getElementById("multiplier3").addEventListener("click", () => selectMultiplier(3));
 });
+
+window.addEventListener('keydown', (event) => {
+    if (event.key === 'y' || event.key === 'Y') {
+      // Reload the page
+      location.reload();
+    }
+  });
