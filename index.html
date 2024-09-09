@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slot Machine</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="multiplier-section">
+        <h3>Select Multiplier</h3>
+        <button class="multiplierButton" id="multiplier1">x1</button>
+        <button class="multiplierButton" id="multiplier2">x2</button>
+        <button class="multiplierButton" id="multiplier3">x3</button>
+    </div>
+    
+    <div class="slot-machine">
+        <div class="slot-container">
+            <div class="slot" id="slot1"></div>
+            <button class="lockButton" id="lock1">Lock</button>
+        </div>
+        <div class="slot-container">
+            <div class="slot" id="slot2"></div>
+            <button class="lockButton" id="lock2">Lock</button>
+        </div>
+        <div class="slot-container">
+            <div class="slot" id="slot3"></div>
+            <button class="lockButton" id="lock3">Lock</button>
+        </div>
+        <div class="slot-container">
+            <div class="slot" id="slot4"></div>
+            <button class="lockButton" id="lock4">Lock</button>
+        </div>
+        <div class="slot-container">
+            <div class="slot" id="slot5"></div>
+            <button class="lockButton" id="lock5">Lock</button>
+        </div>
+    </div>
+
+    <button id="spinButton" disabled>Spin</button>
+    <p id="score">Money: 50</p>
+
+    <script src="script.js"></script>
+</body>
+</html>
