@@ -48,7 +48,7 @@ function startSpin() {
         }
     });
 
-    // Stop the spinning after 5 seconds
+    // Stop the spinning after 1 second
     setTimeout(() => {
         stopAllSpins();
         checkWinCondition();
@@ -92,12 +92,20 @@ function checkWinCondition() {
         score += totalPoints;  // Add the points to the score
         alert(`You got five ${firstSlotContent}! You get ${totalPoints} points.`);
 
-        // Unlock all slots and reset multiplier options
+        // Unlock all slots, reset multiplier options, and change all slots to random items
         unlockAllSlots();
         showMultiplierOptions();
+        resetSlots();
     }
 
     updateScore();
+}
+
+// Function to reset all slots to random items
+function resetSlots() {
+    slots.forEach(slot => {
+        createRandomSlotContent(slot);  // Set each slot to a random item
+    });
 }
 
 // Function to unlock all slots
@@ -210,3 +218,6 @@ window.addEventListener('keydown', (event) => {
       location.reload();
     }
 });
+
+
+/*                     CUH 2.0               */
