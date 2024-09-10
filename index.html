@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <title>Slot Machine</title>
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -37,7 +38,18 @@
         </div>
     </div>
 
-    <button id="spinButton" disabled>Spin</button>
+    <div class="win-conditions">
+        WIN CONDITIONS:<br>
+        <br>
+        ▲ ▲ ▲ ▲ ▲   = 2<br>
+        ■ ■ ■ ■ ■   = 4<br>
+        ● ● ● ● ●   = 6<br>
+        ▬ ▬ ▬ ▬ ▬ = 8<br>
+        7 7 7 7 7   = 100
+    </div>
+
+    <button class="spinButton" id="spinButton" disabled>Spin</button>
+    
     <p id="score">Money: 50</p>
 
     <script src="script.js"></script>

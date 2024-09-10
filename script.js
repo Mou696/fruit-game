@@ -84,19 +84,38 @@ function checkWinCondition() {
                 break;
             case "7":
                 points = 100;
+                // Trigger confetti when all slots have 7s
+                triggerConfetti();
                 break;
         }
         const totalPoints = points * multiplier;  // Apply the multiplier to the points
         score += totalPoints;  // Add the points to the score
         alert(`You got five ${firstSlotContent}! You get ${totalPoints} points.`);
+
+        // Unlock all slots and reset multiplier options
+        unlockAllSlots();
+        showMultiplierOptions();
     }
 
     updateScore();
 }
 
-// Function to update the score on the screen
+// Function to unlock all slots
+function unlockAllSlots() {
+    lockedSlots = [false, false, false, false, false];  // Unlock all slots
+    document.querySelectorAll('.lockButton').forEach((button) => {
+        button.innerText = "Lock";  // Reset button text to "Lock"
+    });
+}
+
+// Function to show multiplier options
+function showMultiplierOptions() {
+    document.getElementById("multiplier-section").style.display = "block";  // Show multiplier options
+}
+
+// Function to update the score (Money) on the screen
 function updateScore() {
-    document.getElementById("score").innerText = "Score: " + score;
+    document.getElementById("score").innerText = "Money: " + score;  // Updated to show Money
     // Disable the spin button if the player doesn't have enough points
     if (score < multiplier) {
         document.getElementById("spinButton").disabled = true;
@@ -119,6 +138,41 @@ function selectMultiplier(mult) {
     multiplier = mult;
     document.getElementById("spinButton").disabled = false;  // Enable the spin button
     document.getElementById("multiplier-section").style.display = "none";  // Hide the multiplier section
+}
+
+// Function to trigger a confetti animation that fills the screen
+function triggerConfetti() {
+    const duration = 15 * 1000,
+        animationEnd = Date.now() + duration,
+        defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+
+    function randomInRange(min, max) {
+        return Math.random() * (max - min) + min;
+    }
+
+    const interval = setInterval(function() {
+        const timeLeft = animationEnd - Date.now();
+
+        if (timeLeft <= 0) {
+            return clearInterval(interval);
+        }
+
+        const particleCount = 50 * (timeLeft / duration);
+
+        // since particles fall down, start a bit higher than random
+        confetti(
+            Object.assign({}, defaults, {
+                particleCount,
+                origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 },
+            })
+        );
+        confetti(
+            Object.assign({}, defaults, {
+                particleCount,
+                origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 },
+            })
+        );
+    }, 250);
 }
 
 // Initialize the game
@@ -155,4 +209,4 @@ window.addEventListener('keydown', (event) => {
       // Reload the page
       location.reload();
     }
-  });
+});
