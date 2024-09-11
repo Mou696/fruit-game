@@ -1,4 +1,3 @@
-// List of items (triangle, circle, square, rectangle, number 7)
 const items = ["▲", "●", "■", "▬", "7"];
 let slots = [];
 let spinIntervals = [];
@@ -6,6 +5,32 @@ let score = 50;  // Start with 50 points
 let multiplier = 1;  // Default multiplier is 1
 let lockedSlots = [false, false, false, false, false];  // Track which slots are locked
 let isSpinning = false;  // Track if the slots are currently spinning
+
+// Load sound effects
+const backgroundMusic = new Audio("bgm.mp3");
+const rollingSound = new Audio("rollsound.mp3");
+const clickSound = new Audio('clicksound.wav'); 
+const fireworkSound = new Audio('firework.mp3'); 
+
+backgroundMusic.volume = 0.3;  
+rollingSound.volume = 0.4;     
+fireworkSound.volume = 1.0;    
+
+// Function to play click sound
+function playClickSound() {
+    clickSound.play();
+}
+
+function playFireworkSound() {
+    fireworkSound.volume = 1.0;  
+    fireworkSound.play();
+    
+    setTimeout(() => {
+        fireworkSound.pause();
+        fireworkSound.currentTime = 0;  // Reset to start after 10 seconds
+    }, 12000);  // Stop after 10 seconds
+}
+
 
 // Function to create random items in a slot
 function createRandomSlotContent(slot) {
@@ -25,7 +50,9 @@ function startSpin() {
         return;  // Prevent starting a new spin if already spinning
     }
 
-    // Set spinning status to true and disable the spin button
+    // Play rolling sound
+    rollingSound.play();
+
     isSpinning = true;
     document.getElementById("spinButton").disabled = true;
 
@@ -84,8 +111,9 @@ function checkWinCondition() {
                 break;
             case "7":
                 points = 100;
-                // Trigger confetti when all slots have 7s
+                // Trigger confetti and firework sound when all slots have 7s
                 triggerConfetti();
+                playFireworkSound();
                 break;
         }
         const totalPoints = points * multiplier;  // Apply the multiplier to the points
@@ -185,18 +213,40 @@ function triggerConfetti() {
 
 // Initialize the game
 document.addEventListener("DOMContentLoaded", () => {
+    // Play background music when the game loads
+    backgroundMusic.loop = true;  // Loop background music
+    backgroundMusic.play();  // Start background music
+
     // Grab all the slots
     slots = Array.from(document.querySelectorAll('.slot'));
 
     // Add event listener to the spin button
-    document.getElementById("spinButton").addEventListener("click", startSpin);
+    document.getElementById("spinButton").addEventListener("click", () => {
+        playClickSound();
+        startSpin();
+    });
 
     // Add event listeners to lock buttons
-    document.getElementById("lock1").addEventListener("click", () => toggleLock(0));
-    document.getElementById("lock2").addEventListener("click", () => toggleLock(1));
-    document.getElementById("lock3").addEventListener("click", () => toggleLock(2));
-    document.getElementById("lock4").addEventListener("click", () => toggleLock(3));
-    document.getElementById("lock5").addEventListener("click", () => toggleLock(4));
+    document.getElementById("lock1").addEventListener("click", () => {
+        playClickSound();
+        toggleLock(0);
+    });
+    document.getElementById("lock2").addEventListener("click", () => {
+        playClickSound();
+        toggleLock(1);
+    });
+    document.getElementById("lock3").addEventListener("click", () => {
+        playClickSound();
+        toggleLock(2);
+    });
+    document.getElementById("lock4").addEventListener("click", () => {
+        playClickSound();
+        toggleLock(3);
+    });
+    document.getElementById("lock5").addEventListener("click", () => {
+        playClickSound();
+        toggleLock(4);
+    });
 
     // Initialize each slot with random content
     slots.forEach(slot => {
@@ -207,9 +257,18 @@ document.addEventListener("DOMContentLoaded", () => {
     updateScore();
 
     // Add event listeners to multiplier buttons
-    document.getElementById("multiplier1").addEventListener("click", () => selectMultiplier(1));
-    document.getElementById("multiplier2").addEventListener("click", () => selectMultiplier(2));
-    document.getElementById("multiplier3").addEventListener("click", () => selectMultiplier(3));
+    document.getElementById("multiplier1").addEventListener("click", () => {
+        playClickSound();
+        selectMultiplier(1);
+    });
+    document.getElementById("multiplier2").addEventListener("click", () => {
+        playClickSound();
+        selectMultiplier(2);
+    });
+    document.getElementById("multiplier3").addEventListener("click", () => {
+        playClickSound();
+        selectMultiplier(3);
+    });
 });
 
 window.addEventListener('keydown', (event) => {
@@ -218,6 +277,5 @@ window.addEventListener('keydown', (event) => {
       location.reload();
     }
 });
-
-
-/*                     CUH 2.0               */
+                     
+                                                                                                   

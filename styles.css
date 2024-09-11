@@ -88,7 +88,6 @@ body {
     transform: scale(1.1);
 }
 
-/* Bigger Spin Button */
 #spinButton {
     padding: 20px 40px;   /* Increased padding for a bigger button */
     font-size: 20px;      /* Bigger font size */
@@ -108,9 +107,8 @@ body {
     transform: scale(1.05);
 }
 
-/* Spacing between items and lock/unlock buttons */
 .slot-container .slot {
-    margin-bottom: 10px; /* Add space between slot and buttons */
+    margin-bottom: 12px; /* Add space between slot and buttons */
 }
 
 .win-conditions {
